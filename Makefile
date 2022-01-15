@@ -1,14 +1,14 @@
-SRC_CLIENT = client.c ft_atoi.c
+SRC_CLIENT = client.c ft_atoi.c ft_putnbr.c ft_putchar.c
 
-SRC_SERVER = ft_atoi.c  server.c
+SRC_SERVER = ft_atoi.c  server.c ft_putnbr.c ft_putchar.c
 
 OBG_CLIENT = $(SRC_CLIENT:.c=.o)
 
 OBG_SERVER = $(SRC_SERVER:.c=.o)
 
-SRC_CLIENT_BONUS = client_bonus.c ft_atoi.c
+SRC_CLIENT_BONUS = client_bonus.c ft_atoi.c ft_putnbr.c ft_putchar.c
 
-SRC_SERVER_BONUS = ft_atoi.c  server_bonus.c
+SRC_SERVER_BONUS = ft_atoi.c  server_bonus.c ft_putnbr.c ft_putchar.c
 
 OBG_CLIENT_BONUS = $(SRC_CLIENT_BONUS:.c=.o)
 

@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoumni <mmoumni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/16 00:10:47 by mmoumni           #+#    #+#             */
-/*   Updated: 2022/01/16 00:37:14 by mmoumni          ###   ########.fr       */
+/*   Created: 2022/01/16 00:35:13 by mmoumni           #+#    #+#             */
+/*   Updated: 2022/01/16 00:37:54 by mmoumni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "minitalk.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
+void	ft_putnbr(int nb)
+{
+	long	n;
 
-int		ft_atoi(char *str);
-void	ft_putchar(int c);
-void	ft_putnbr(int nb);
-
-#endif
+	n = nb;
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n = n * -1;
+	}
+	if (n > 9)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+	{
+		ft_putchar(n + '0');
+	}
+}
