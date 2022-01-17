@@ -6,7 +6,7 @@
 /*   By: mmoumni <mmoumni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 23:49:50 by mmoumni           #+#    #+#             */
-/*   Updated: 2022/01/16 00:15:20 by mmoumni          ###   ########.fr       */
+/*   Updated: 2022/01/17 13:23:43 by mmoumni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	bits(int pid, char c)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
+		usleep (800);
 		c = c << 1;
 		j++;
-		usleep (300);
 	}
 }
 
@@ -38,9 +38,9 @@ int	main(int ac, char **av)
 	int	pid;
 	int	i;
 
-	if (ac < 3)
+	if (ac != 3)
 	{
-		write(1, "There is An Error Here\n", 23);
+		write(1, "Invalid Parameters.\n", 21);
 	}
 	else
 	{
@@ -53,4 +53,5 @@ int	main(int ac, char **av)
 		}
 		bits(pid, av[2][i]);
 	}
+	return (0);
 }

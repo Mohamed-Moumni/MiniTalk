@@ -6,42 +6,52 @@
 /*   By: mmoumni <mmoumni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 23:50:18 by mmoumni           #+#    #+#             */
-/*   Updated: 2022/01/16 00:40:43 by mmoumni          ###   ########.fr       */
+/*   Updated: 2022/01/17 13:34:45 by mmoumni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	ft_print(int var, int result)
+int	g_pid = 0;
+
+void	ft_print(int *i, int *result)
 {
-	if (var == 8)
+	if (*i == 8)
 	{
-		ft_putchar(result);
-		result = result + 1;
-		var = 0;
+		ft_putchar(*result);
+		*result = 0;
+		*i = 0;
 	}
 }
 
-void	sig_handler(int sig, siginfo_t *t, void *b)
+void	reset(int *i, int *result, int pid)
 {
-	static int	var;
+	g_pid = pid;
+	*i = 0;
+	*result = 0;
+}
+
+void	sig_handler(int sig, siginfo_t *sig_info, void *b)
+{
+	static int	i;
 	static int	result;
 
 	(void)b;
-	(void)t;
+	if (g_pid != sig_info->si_pid)
+		reset(&i, &result, sig_info->si_pid);
 	if (sig == SIGUSR1)
 	{
 		result *= 2;
 		result = result + 1;
-		var++;
-		ft_print(var, result);
+		i++;
+		ft_print(&i, &result);
 	}
 	else
 	{
 		result *= 2;
 		result = result + 0;
-		var++;
-		ft_print(var, result);
+		i++;
+		ft_print(&i, &result);
 	}
 }
 
@@ -51,6 +61,7 @@ int	main(void)
 	struct sigaction	sig_struct;
 
 	pid = getpid();
+	write(1, "Server PID :", 13);
 	ft_putnbr(pid);
 	ft_putchar('\n');
 	sig_struct.__sigaction_u.__sa_sigaction = &sig_handler;
@@ -61,4 +72,5 @@ int	main(void)
 	{
 		pause();
 	}
+	return (0);
 }

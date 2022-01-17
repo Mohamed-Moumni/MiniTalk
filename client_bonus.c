@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmoumni <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mmoumni <mmoumni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 00:17:58 by mmoumni           #+#    #+#             */
-/*   Updated: 2022/01/16 00:23:00 by mmoumni          ###   ########.fr       */
+/*   Updated: 2022/01/17 13:31:20 by mmoumni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sig_handler(int sig, siginfo_t *t, void *b)
 	(void)b;
 	if (sig == SIGUSR1)
 	{
-		write(1, "The Signal Is Recieved\n", 24);
+		write(1, "The Signal Is Received\n", 24);
 	}
 }
 
@@ -37,9 +37,9 @@ void	bits(int pid, char c)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
+		usleep (300);
 		c = c << 1;
 		j++;
-		usleep (300);
 	}
 }
 
@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 
 	if (ac < 3)
 	{
-		write(1, "There is An Error Here\n", 23);
+		write(1, "Invalid Parameters.\n", 21);
 	}
 	else
 	{
